@@ -1160,7 +1160,10 @@ public class CameraSource {
         @SuppressLint("Assert")
         void release() {
             assert (mProcessingThread.getState() == State.TERMINATED);
-            mDetector.release();
+            // Calling release() would cause a crash when mDetector is null
+            if (mDetector != null) {
+                mDetector.release();
+            }
             mDetector = null;
         }
 
