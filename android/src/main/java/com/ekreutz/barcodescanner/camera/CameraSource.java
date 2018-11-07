@@ -1078,8 +1078,10 @@ public class CameraSource {
     }
 
     public void setRotation() {
-        if (mCamera != null && mCameraId >= 0) {
-            setRotation(mCamera, mCamera.getParameters(), mCameraId);
+        synchronized (mCameraLock) {
+            if (mCamera != null && mCameraId >= 0) {
+                setRotation(mCamera, mCamera.getParameters(), mCameraId);
+            }
         }
     }
 
